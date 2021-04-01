@@ -12,7 +12,6 @@ RUN apk add --update --no-cache \
         build-base \
         cmake \
         bash \
-        jemalloc-dev \
         boost-dev \
         autoconf \
         zlib-dev \
