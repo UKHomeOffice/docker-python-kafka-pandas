@@ -17,6 +17,7 @@ RUN apk add --update --no-cache \
         zlib-dev \
         flex \
         bison \
+        arrow \
     && apk add --virtual .build-deps gcc g++ musl-dev rust git
 
 RUN pip install pandas pyarrow confluent-kafka
