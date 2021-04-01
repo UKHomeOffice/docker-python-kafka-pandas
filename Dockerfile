@@ -17,9 +17,36 @@ RUN apk add --update --no-cache \
         zlib-dev \
         flex \
         bison \
-        arrow \
     && apk add --virtual .build-deps gcc g++ musl-dev rust git
 
-RUN pip install pandas pyarrow confluent-kafka
+RUN git clone https://github.com/apache/arrow.git
+
+RUN mkdir /arrow/cpp/build
+WORKDIR /arrow/cpp/build
+
+ENV ARROW_BUILD_TYPE=release
+ENV ARROW_HOME=/usr/local
+ENV PARQUET_HOME=/usr/local
+
+#disable backtrace
+RUN sed -i -e '/_EXECINFO_H/,/endif/d' -e '/execinfo/d' ../src/arrow/util/logging.cc
+
+RUN cmake -DCMAKE_BUILD_TYPE=$ARROW_BUILD_TYPE \
+          -DCMAKE_INSTALL_LIBDIR=lib \
+          -DCMAKE_INSTALL_PREFIX=$ARROW_HOME \
+          -DARROW_PARQUET=on \
+          -DARROW_PYTHON=on \
+          -DARROW_PLASMA=on \
+          -DARROW_BUILD_TESTS=OFF \
+          ..
+RUN make -j$(nproc)
+RUN make install
+
+WORKDIR /arrow/python
+
+RUN python setup.py build_ext --build-type=$ARROW_BUILD_TYPE \
+       --with-parquet --inplace
+
+RUN pip install pandas confluent-kafka
 
 RUN apk --purge del .build-deps gcc g++ musl-dev rust git
