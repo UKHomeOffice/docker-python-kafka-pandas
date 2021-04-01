@@ -19,7 +19,9 @@ RUN apk add --update --no-cache \
         bison \
     && apk add --virtual .build-deps gcc g++ musl-dev rust git
 
-RUN pip install pandas confluent-kafka
+ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
+
+RUN pip install pandas confluent-kafka==v1.5.0
 
 RUN git clone https://github.com/apache/arrow.git
 
@@ -45,6 +47,8 @@ RUN make -j$(nproc)
 RUN make install
 
 WORKDIR /arrow/python
+
+RUN pip install cython
 
 RUN python setup.py build_ext --build-type=$ARROW_BUILD_TYPE \
        --with-parquet --inplace
