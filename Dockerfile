@@ -19,6 +19,8 @@ RUN apk add --update --no-cache \
         bison \
     && apk add --virtual .build-deps gcc g++ musl-dev rust git
 
+RUN pip install pandas confluent-kafka
+
 RUN git clone https://github.com/apache/arrow.git
 
 RUN mkdir /arrow/cpp/build
@@ -46,7 +48,5 @@ WORKDIR /arrow/python
 
 RUN python setup.py build_ext --build-type=$ARROW_BUILD_TYPE \
        --with-parquet --inplace
-
-RUN pip install pandas confluent-kafka
 
 RUN apk --purge del .build-deps gcc g++ musl-dev rust git
