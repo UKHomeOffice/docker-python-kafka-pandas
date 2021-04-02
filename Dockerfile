@@ -1,7 +1,4 @@
-FROM python:3.9.2-alpine3.13
-
-RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
-RUN apk add --update --no-cache py3-numpy py3-pandas@testing
+FROM python:3.8.8-alpine3.13
 
 RUN apk add --update --no-cache \
         libffi-dev \
@@ -21,9 +18,9 @@ RUN apk add --update --no-cache \
 
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
-RUN pip install pandas confluent-kafka==v1.5.0
+RUN pip install cython pandas confluent-kafka==v1.5.0
 
-RUN git clone https://github.com/apache/arrow.git
+RUN git clone --depth 1 --branch apache-arrow-3.0.0 https://github.com/apache/arrow.git
 
 RUN mkdir /arrow/cpp/build
 WORKDIR /arrow/cpp/build
@@ -46,11 +43,6 @@ RUN cmake -DCMAKE_BUILD_TYPE=$ARROW_BUILD_TYPE \
 RUN make -j$(nproc)
 RUN make install
 
-WORKDIR /arrow/python
-
-RUN pip install cython
-
-RUN python setup.py build_ext --build-type=$ARROW_BUILD_TYPE \
-       --with-parquet --inplace
+RUN pip install pyarrow
 
 RUN apk --purge del .build-deps gcc g++ musl-dev rust git
