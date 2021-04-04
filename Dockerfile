@@ -51,4 +51,4 @@ RUN python setup.py build_ext --build-type=$ARROW_BUILD_TYPE \
 
 RUN apk --purge del .build-deps gcc g++ musl-dev git
 
-ENV PYTHONPATH "${PYTHONPATH}:/arrow/python"
+RUN mv /arrow/python/pyarrow /usr/local/lib/python3.8/site-packages/pyarrow
