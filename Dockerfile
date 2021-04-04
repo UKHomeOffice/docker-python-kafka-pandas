@@ -14,7 +14,8 @@ RUN apk add --update --no-cache \
         zlib-dev \
         flex \
         bison \
-    && apk add --virtual .build-deps gcc g++ musl-dev rust git
+        rust \
+    && apk add --virtual .build-deps gcc g++ musl-dev git
 
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
@@ -43,6 +44,11 @@ RUN cmake -DCMAKE_BUILD_TYPE=$ARROW_BUILD_TYPE \
 RUN make -j$(nproc)
 RUN make install
 
-RUN pip install pyarrow
+WORKDIR /arrow/python
 
-RUN apk --purge del .build-deps gcc g++ musl-dev rust git
+RUN python setup.py build_ext --build-type=$ARROW_BUILD_TYPE \
+       --with-parquet --inplace
+
+RUN apk --purge del .build-deps gcc g++ musl-dev git
+
+ENV PYTHONPATH "${PYTHONPATH}:/arrow/python"
