@@ -7,10 +7,11 @@ RUN apk add --update --no-cache \
         ca-certificates \
         cargo \
         build-base \
+        autoconf \
         cmake \
+        make \
         bash \
         boost-dev \
-        autoconf \
         zlib-dev \
         flex \
         bison \
@@ -40,6 +41,8 @@ RUN cmake -DCMAKE_BUILD_TYPE=$ARROW_BUILD_TYPE \
           -DARROW_PYTHON=on \
           -DARROW_PLASMA=on \
           -DARROW_BUILD_TESTS=OFF \
+          -DARROW_WITH_SNAPPY=ON \
+          -DARROW_S3=ON \
           ..
 RUN make -j$(nproc)
 RUN make install
