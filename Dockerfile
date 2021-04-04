@@ -16,7 +16,7 @@ RUN apk add --update --no-cache \
         flex \
         bison \
         rust \
-    && apk add --virtual .build-deps gcc g++ musl-dev git
+    && apk add --virtual .build-deps gcc g++ musl-dev git curl
 
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
@@ -52,6 +52,6 @@ WORKDIR /arrow/python
 RUN python setup.py build_ext --build-type=$ARROW_BUILD_TYPE \
        --with-parquet --inplace
 
-RUN apk --purge del .build-deps gcc g++ musl-dev git
+RUN apk --purge del .build-deps gcc g++ musl-dev git curl
 
 RUN mv /arrow/python/pyarrow /usr/local/lib/python3.8/site-packages/pyarrow
