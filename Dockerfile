@@ -23,6 +23,8 @@ ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
 RUN pip install cython pandas confluent-kafka==v1.5.0
 
+RUN mkdir /build
+WORKDIR /build
 # https://arrow.apache.org/docs/developers/cpp/building.html?highlight=snappy
 RUN git clone --depth 1 --branch apache-arrow-3.0.0 https://github.com/apache/arrow.git
 
@@ -54,6 +56,6 @@ WORKDIR /arrow/python
 RUN python setup.py build_ext --build-type=$ARROW_BUILD_TYPE \
        --with-parquet --inplace
 
-RUN apk --purge del .build-deps gcc g++ musl-dev git curl
-
+RUN apk --purge del .build-deps gcc g++ musl-dev git
+RUN rm -rf /build
 RUN mv /arrow/python/pyarrow /usr/local/lib/python3.8/site-packages/pyarrow
