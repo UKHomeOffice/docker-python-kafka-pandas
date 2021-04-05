@@ -16,12 +16,14 @@ RUN apk add --update --no-cache \
         flex \
         bison \
         rust \
-    && apk add --virtual .build-deps gcc g++ musl-dev git curl
+        curl-dev \
+    && apk add --virtual .build-deps gcc g++ musl-dev git
 
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
 RUN pip install cython pandas confluent-kafka==v1.5.0
 
+# https://arrow.apache.org/docs/developers/cpp/building.html?highlight=snappy
 RUN git clone --depth 1 --branch apache-arrow-3.0.0 https://github.com/apache/arrow.git
 
 RUN mkdir /arrow/cpp/build
@@ -31,7 +33,7 @@ ENV ARROW_BUILD_TYPE=release
 ENV ARROW_HOME=/usr/local
 ENV PARQUET_HOME=/usr/local
 
-#disable backtrace
+# disable backtrace
 RUN sed -i -e '/_EXECINFO_H/,/endif/d' -e '/execinfo/d' ../src/arrow/util/logging.cc
 
 RUN cmake -DCMAKE_BUILD_TYPE=$ARROW_BUILD_TYPE \
