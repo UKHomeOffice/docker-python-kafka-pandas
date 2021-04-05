@@ -55,5 +55,5 @@ RUN python setup.py build_ext --build-type=$ARROW_BUILD_TYPE \
        --with-parquet --inplace
 
 RUN apk --purge del .build-deps gcc g++ musl-dev git
-RUN rm -rf /arrow/js/package-lock.json
+RUN rm -rf /arrow/cpp/build/thrift_ep-prefix/src/thrift_ep/lib/js/package-lock.json
 RUN mv /arrow/python/pyarrow /usr/local/lib/python3.8/site-packages/pyarrow
