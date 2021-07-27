@@ -17,7 +17,8 @@ RUN apk add --update --no-cache \
         bison \
         rust \
         curl-dev \
-    && apk add --virtual .build-deps gcc g++ musl-dev git
+    && apk add --virtual .build-deps gcc g++ musl-dev git \
+    && apk add --upgrade krb5-libs
 
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
