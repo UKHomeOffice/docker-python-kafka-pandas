@@ -18,7 +18,7 @@ RUN apk add --update --no-cache \
         rust \
         curl-dev \
     && apk add --virtual .build-deps gcc g++ musl-dev git \
-    && apk add --upgrade krb5-libs
+    && apk add --upgrade krb5-libs apk-tools
 
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
