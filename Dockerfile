@@ -20,12 +20,14 @@ RUN apk add --update --no-cache \
     && apk add --virtual .build-deps gcc g++ musl-dev git \
     && apk add --upgrade krb5-libs apk-tools
 
+RUN apk add --update --no-cache
+
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
 RUN pip install cython pandas confluent-kafka==v1.5.0
 
 # https://arrow.apache.org/docs/developers/cpp/building.html?highlight=snappy
-RUN git clone --depth 1 --branch apache-arrow-3.0.0 https://github.com/apache/arrow.git
+RUN git clone --depth 1 --branch apache-arrow-5.0.0 https://github.com/apache/arrow.git
 
 RUN mkdir /arrow/cpp/build
 WORKDIR /arrow/cpp/build
@@ -57,4 +59,10 @@ RUN python setup.py build_ext --build-type=$ARROW_BUILD_TYPE \
 
 RUN apk --purge del .build-deps gcc g++ musl-dev git
 RUN rm -rf /arrow/cpp/build/thrift_ep-prefix/src/thrift_ep/lib/js/package-lock.json
+RUN rm -rf /arrow/cpp/build/thrift_ep-prefix/src/thrift_ep/lib/ts/package-lock.json
+RUN rm -rf /arrow/js/yarn.lock
+RUN rm -rf /usr/lib/rustlib/rustc-src/rust/Cargo.lock
+RUN rm -rf /usr/lib/rustlib/rustc-src/rust/compiler/rustc_codegen_cranelift/Cargo.lock
+RUN rm -rf /usr/lib/rustlib/rustc-src/rust/compiler/rustc_codegen_cranelift/build_sysroot/Cargo.lock
+
 RUN mv /arrow/python/pyarrow /usr/local/lib/python3.8/site-packages/pyarrow
