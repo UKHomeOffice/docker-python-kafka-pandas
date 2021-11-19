@@ -22,6 +22,8 @@ RUN apk add --update --no-cache \
 
 RUN apk add --update --no-cache
 
+RUN apk -U upgrade
+
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
 RUN pip install cython pandas confluent-kafka==v1.5.0
