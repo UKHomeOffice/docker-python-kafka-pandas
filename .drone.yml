@@ -8,7 +8,7 @@ platform:
   arch: amd64
 
 steps:
-- name: build-test-dev
+- name: build
   pull: if-not-exists
   image: plugins/docker
   settings:
@@ -18,7 +18,7 @@ steps:
     repo: quay.io/ukhomeofficedigital/python-kafka-pandas
     tags:
     - ${DRONE_COMMIT_SHA}
-    - b${DRONE_BUILD_NUMBER}-test
+    - b${DRONE_BUILD_NUMBER}
   environment:
     DOCKER_PASSWORD:
       from_secret: docker_password
@@ -32,7 +32,7 @@ steps:
   pull: if-not-exists
   image: quay.io/ukhomeofficedigital/trivyscanner:master
   commands:
-  - trivy image --ignore-unfixed --exit-code 1 --no-progress quay.io/ukhomeofficedigital/python-kafka-pandas:b${DRONE_BUILD_NUMBER}-test
+  - trivy image --ignore-unfixed --exit-code 1 --no-progress quay.io/ukhomeofficedigital/python-kafka-pandas:${DRONE_COMMIT_SHA}
   when:
     branch:
       exclude:
@@ -49,8 +49,7 @@ steps:
     registry: quay.io
     repo: quay.io/ukhomeofficedigital/python-kafka-pandas
     tags:
-    - ${DRONE_COMMIT_SHA}
-    - b${DRONE_BUILD_NUMBER}
+    - latest
   environment:
     DOCKER_PASSWORD:
       from_secret: docker_password
