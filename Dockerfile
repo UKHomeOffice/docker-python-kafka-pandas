@@ -1,4 +1,4 @@
-FROM python:3.8.13-alpine3.16
+FROM python:3.10.6-alpine3.16
 
 RUN apk add --update --no-cache \
         libffi-dev \
@@ -62,6 +62,7 @@ RUN python setup.py build_ext --build-type=$ARROW_BUILD_TYPE \
 RUN apk --purge del .build-deps gcc g++ musl-dev git
 RUN rm -rf /arrow/cpp/build/thrift_ep-prefix/src/thrift_ep/lib/js/package-lock.json
 RUN rm -rf /arrow/cpp/build/thrift_ep-prefix/src/thrift_ep/lib/ts/package-lock.json
+RUN rm -rf /arrow/cpp/build/thrift_ep-prefix/src/thrift_ep/tutorial/go/server.key:1
 RUN rm -rf /arrow/js/yarn.lock
 RUN rm -rf /usr/lib/rustlib/rustc-src/rust/Cargo.lock
 RUN rm -rf /usr/lib/rustlib/rustc-src/rust/compiler/rustc_codegen_cranelift/Cargo.lock
