@@ -18,7 +18,7 @@ steps:
     repo: quay.io/ukhomeofficedigital/python-kafka-pandas
     tags:
     - ${DRONE_COMMIT_SHA}
-    - b${DRONE_BUILD_NUMBER}
+    cache_from: quay.io/ukhomeofficedigital/python-kafka-pandas:latest
   environment:
     DOCKER_PASSWORD:
       from_secret: docker_password
@@ -50,6 +50,8 @@ steps:
     repo: quay.io/ukhomeofficedigital/python-kafka-pandas
     tags:
     - latest
+    - b${DRONE_BUILD_NUMBER}
+    cache_from: quay.io/ukhomeofficedigital/python-kafka-pandas:latest
   environment:
     DOCKER_PASSWORD:
       from_secret: docker_password
