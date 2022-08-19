@@ -3,6 +3,11 @@ kind: pipeline
 name: default
 type: kubernetes
 
+resources:
+  requests:
+    cpu: 1000
+    memory: 2000MiB
+
 platform:
   os: linux
   arch: amd64
@@ -24,6 +29,10 @@ steps:
       from_secret: docker_password
     DOCKER_USERNAME:
       from_secret: docker_username
+  resources:
+    limits:
+      cpu: 1000
+      memory: 2000MiB
   when:
     event:
     - push
