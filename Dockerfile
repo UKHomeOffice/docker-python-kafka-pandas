@@ -17,7 +17,6 @@ RUN apk add --update --no-cache \
         bison \
         rust \
         curl-dev \
-        py3-boto3 \
     && apk add --virtual .build-deps gcc g++ musl-dev git \
     && apk add --upgrade krb5-libs apk-tools
 
