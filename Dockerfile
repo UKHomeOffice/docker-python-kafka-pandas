@@ -67,5 +67,6 @@ RUN rm -rf /usr/lib/rustlib/rustc-src/rust/Cargo.lock
 RUN rm -rf /usr/lib/rustlib/rustc-src/rust/compiler/rustc_codegen_cranelift/Cargo.lock
 RUN rm -rf /usr/lib/rustlib/rustc-src/rust/compiler/rustc_codegen_gcc/Cargo.lock
 RUN rm -rf /usr/lib/rustlib/rustc-src/rust/compiler/rustc_codegen_cranelift/build_sysroot/Cargo.lock
+RUN rm -f /arrow/cpp/build/thrift_ep-prefix/src/thrift_ep/tutorial/go/server.key
 
 RUN mv /arrow/python/pyarrow /usr/local/lib/python3.8/site-packages/pyarrow
