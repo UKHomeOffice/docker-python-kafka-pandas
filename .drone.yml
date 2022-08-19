@@ -68,6 +68,8 @@ steps:
     - main
     event:
     - promote
+    target:
+    - production
 
 services:
   - name: docker
