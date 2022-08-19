@@ -27,8 +27,6 @@ steps:
       from_secret: docker_username
   when:
     branch:
-    - feature/*
-    - hotfix/*
       exclude:
       - main
     event:
