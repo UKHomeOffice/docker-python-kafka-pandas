@@ -1,4 +1,4 @@
-FROM python:3.8.13-alpine3.16
+FROM python:3.8.14-alpine3.16
 
 RUN apk add --update --no-cache \
         libffi-dev \
