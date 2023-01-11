@@ -26,6 +26,8 @@ RUN apk -U upgrade
 
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
+RUN pip install -U setuptools
+
 RUN pip install cython pandas confluent-kafka==v1.5.0
 
 # https://arrow.apache.org/docs/developers/cpp/building.html?highlight=snappy
