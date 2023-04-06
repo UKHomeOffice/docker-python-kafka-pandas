@@ -31,7 +31,7 @@ RUN pip install -U setuptools
 RUN pip install cython pandas confluent-kafka==v1.5.0
 
 # https://arrow.apache.org/docs/developers/cpp/building.html?highlight=snappy
-RUN git clone --depth 1 --branch apache-arrow-5.0.0 https://github.com/apache/arrow.git
+RUN git clone --depth 1 --branch apache-arrow-10.0.0 https://github.com/apache/arrow.git
 
 RUN mkdir /arrow/cpp/build
 WORKDIR /arrow/cpp/build
