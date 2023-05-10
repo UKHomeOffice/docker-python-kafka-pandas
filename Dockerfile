@@ -20,7 +20,7 @@ RUN apk add --update --no-cache \
     && apk add --virtual .build-deps gcc g++ musl-dev git \
     && apk add --upgrade krb5-libs apk-tools
 
-RUN apk add --update --no-cache
+RUN apk add --update --no-cache openssl-dev>=3.0.8-r4
 
 RUN apk -U upgrade
 
