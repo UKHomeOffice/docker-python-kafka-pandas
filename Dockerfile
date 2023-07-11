@@ -43,6 +43,12 @@ ENV PARQUET_HOME=/usr/local
 # disable backtrace
 RUN sed -i -e '/_EXECINFO_H/,/endif/d' -e '/execinfo/d' ../src/arrow/util/logging.cc
 
+RUN apk update \
+    && apk upgrade \
+    && apk add --no-cache build-base \
+    autoconf \
+    thrift-dev
+
 RUN cmake -DCMAKE_BUILD_TYPE=$ARROW_BUILD_TYPE \
           -DCMAKE_INSTALL_LIBDIR=lib \
           -DCMAKE_INSTALL_PREFIX=$ARROW_HOME \
