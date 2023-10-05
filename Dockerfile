@@ -27,8 +27,7 @@ RUN apk -U upgrade
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
 RUN pip install -U setuptools
-RUN pip install Cython==0.29.36
-RUN pip install cython pandas confluent-kafka==v1.5.0
+RUN pip install cython==0.29.36 pandas confluent-kafka==v1.5.0
 
 # https://arrow.apache.org/docs/developers/cpp/building.html?highlight=snappy
 RUN git clone --depth 1 --branch apache-arrow-10.0.0 https://github.com/apache/arrow.git
