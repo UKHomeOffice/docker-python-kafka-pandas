@@ -65,6 +65,8 @@ WORKDIR /arrow/python
 
 RUN python setup.py build_ext --build-type=$ARROW_BUILD_TYPE \
        --with-parquet --inplace
+       
+RUN mv /arrow/python/pyarrow /usr/local/lib/python3.10/site-packages/pyarrow
 
 RUN apk --purge del .build-deps gcc g++ musl-dev git
 RUN rm -rf /arrow/cpp/build/thrift_ep-prefix/src/thrift_ep/lib/js/package-lock.json
@@ -75,5 +77,3 @@ RUN rm -rf /usr/lib/rustlib/rustc-src/rust/compiler/rustc_codegen_cranelift/Carg
 RUN rm -rf /usr/lib/rustlib/rustc-src/rust/compiler/rustc_codegen_gcc/Cargo.lock
 RUN rm -rf /usr/lib/rustlib/rustc-src/rust/compiler/rustc_codegen_cranelift/build_sysroot/Cargo.lock
 RUN rm -f /arrow/cpp/build/thrift_ep-prefix/src/thrift_ep/tutorial/go/server.key
-
-RUN mv /arrow/python/pyarrow /usr/local/lib/python3.9/site-packages/pyarrow
