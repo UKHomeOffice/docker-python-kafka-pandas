@@ -56,6 +56,7 @@ RUN cmake -DCMAKE_BUILD_TYPE=$ARROW_BUILD_TYPE \
           -DARROW_PLASMA=on \
           -DARROW_BUILD_TESTS=OFF \
           -DARROW_WITH_SNAPPY=ON \
+          -DARROW_BOOST_USE_SHARED:BOOL=On \
           -DARROW_S3=OFF \
           ..
 RUN make -j$(nproc)
