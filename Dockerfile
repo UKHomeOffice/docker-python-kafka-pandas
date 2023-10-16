@@ -41,7 +41,7 @@ ENV ARROW_HOME=/usr/local
 ENV PARQUET_HOME=/usr/local
 
 # disable backtrace
-RUN sed -i -e '/_EXECINFO_H/,/endif/d' -e '/execinfo/d' ../src/arrow/util/logging.cc
+# RUN sed -i -e '/_EXECINFO_H/,/endif/d' -e '/execinfo/d' ../src/arrow/util/logging.cc
 
 RUN cmake -DCMAKE_BUILD_TYPE=$ARROW_BUILD_TYPE \
           -DCMAKE_INSTALL_LIBDIR=lib \
