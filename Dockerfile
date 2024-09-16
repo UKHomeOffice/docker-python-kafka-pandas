@@ -23,13 +23,19 @@ RUN apk add --update --no-cache \
 
 #packages to install compilers and libraries needed to build numpy and its dependencies
 RUN apk add --no-cache \
+    python3-dev \
+    gcc \
     gfortran \
     musl-dev \
+    libc-dev \
     g++ \
     lapack-dev \
-    python3-dev \
-    build-base
-    
+    build-base \
+    openblas-dev
+
+RUN pip install --prefer-binary --only-binary=:all: cython pandas numpy fastparquet confluent-kafka==v1.5.0
+
+
 RUN apk add --update --no-cache
 
 RUN pip install --upgrade pip
