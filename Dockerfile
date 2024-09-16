@@ -21,6 +21,15 @@ RUN apk add --update --no-cache \
     && apk add --virtual .build-deps gcc g++ musl-dev git \
     && apk add --upgrade krb5-libs apk-tools
 
+#packages to install compilers and libraries needed to build numpy and its dependencies
+RUN apk add --no-cache \
+    gfortran \
+    musl-dev \
+    g++ \
+    lapack-dev \
+    python3-dev \
+    build-base
+    
 RUN apk add --update --no-cache
 
 RUN pip install --upgrade pip
