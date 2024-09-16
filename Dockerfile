@@ -46,7 +46,7 @@ RUN pip install -U setuptools==74.0.0
 
 #RUN pip install cython pandas numpy fastparquet confluent-kafka==v1.5.0
 
-RUN pip install --prefer-binary cython pandas numpy fastparquet confluent-kafka==v1.5.0
+#RUN pip install --prefer-binary cython pandas numpy fastparquet confluent-kafka==v1.5.0
 
 
 # https://arrow.apache.org/docs/developers/cpp/building.html?highlight=snappy
