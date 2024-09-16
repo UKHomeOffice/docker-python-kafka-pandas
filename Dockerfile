@@ -1,6 +1,7 @@
 FROM python:3.8-alpine3.18
 
 RUN apk add --update --no-cache \
+        pip \
         libffi-dev \
         openssl-dev \
         librdkafka-dev \
@@ -23,7 +24,7 @@ RUN apk add --update --no-cache \
 
 RUN apk add --update --no-cache
 
-RUN apk -U upgrade
+RUN pip install --upgrade pip
 
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
