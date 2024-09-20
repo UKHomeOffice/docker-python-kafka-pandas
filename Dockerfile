@@ -27,7 +27,7 @@ RUN apk -U upgrade
 
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
-RUN pip install -U setuptools
+RUN pip install -U setuptools==70.0.0
 
 RUN pip install cython pandas fastparquet confluent-kafka==v1.5.0
 
