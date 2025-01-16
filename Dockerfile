@@ -27,9 +27,11 @@ RUN python -m pip install pip==24.2
 
 RUN apk -U upgrade
 
-RUN apk update && apk add --upgrade libcrypto3 libssl3 busybox libarchive libexpat libxml2 perl sqlite-libs curl krb5-libs libcurl python3 python3-pyc python3-pycache-pyc0
+RUN apk update && apk add --upgrade libcrypto3 libssl3 busybox libarchive libexpat libxml2 perl sqlite-libs curl libcurl python3 python3-pyc python3-pycache-pyc0
 
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
+
+RUN apk update && apk add --upgrade krb5-libs
 
 RUN pip install -U setuptools==70.0.0
 
