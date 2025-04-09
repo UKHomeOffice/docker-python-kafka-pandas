@@ -27,7 +27,7 @@ RUN python -m pip install pip==24.2
 
 RUN apk -U upgrade
 
-RUN apk update && apk add --upgrade libcrypto3 libssl3 busybox libarchive libexpat libxml2 perl sqlite-libs curl libcurl python3 python3-pyc python3-pycache-pyc0
+RUN apk update && apk add --upgrade libcrypto3 libssl3 busybox libarchive libexpat libxml2 perl sqlite-libs curl libcurl python3 python3-pyc python3-pycache-pyc0 binutils libxml2  xz xz-dev xz-libs
 
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
