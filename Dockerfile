@@ -31,7 +31,7 @@ RUN apk update && apk add --upgrade libcrypto3 libssl3 busybox libarchive libexp
 
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
-RUN apk update && apk add --upgrade krb5-libs xz xz-dev xz-libs setuptools
+RUN apk update && apk add --upgrade krb5-libs xz xz-dev xz-libs
 
 RUN pip install -U setuptools==70.0.0
 
