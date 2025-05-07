@@ -16,7 +16,7 @@ RUN apk add --update --no-cache \
         flex \
         bison \
         rust \
-        curl=8.9.1-r0 \
+        curl=8.12.1-r0 \
         nghttp2-dev=1.57.0-r0 \
     && apk add --virtual .build-deps gcc g++ musl-dev git \
     && apk add --upgrade krb5-libs apk-tools
