@@ -35,10 +35,10 @@ RUN apk update && apk add --upgrade krb5-libs
 
 RUN pip install -U setuptools==70.0.0
 
-RUN pip install cython pandas confluent-kafka==v1.5.0
+RUN pip install cython==3.1.2 pandas=1.5.0 confluent-kafka==v1.5.0
 
 # https://arrow.apache.org/docs/developers/cpp/building.html?highlight=snappy
-RUN git clone --depth 1 --branch apache-arrow-10.0.0 https://github.com/apache/arrow.git
+RUN git clone --depth 1 --branch apache-arrow-17.0.0 https://github.com/apache/arrow.git
 
 RUN mkdir /arrow/cpp/build
 WORKDIR /arrow/cpp/build
