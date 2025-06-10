@@ -32,7 +32,7 @@ RUN apk add --upgrade libcrypto3 libssl3 busybox libarchive libexpat libxml2 per
 
 RUN apk add --upgrade krb5-libs
 
-RUN apk add --no-cache py3-pyarrow=10.0.1-r2
+RUN apk add --no-cache py3-pyarrow=12.0.0-r0
 RUN cp -Rav /usr/lib/python3.10/site-packages/pyarrow* /usr/local/lib/python3.10/site-packages/
 
 RUN apk add py3-pandas=1.5.1-r0
