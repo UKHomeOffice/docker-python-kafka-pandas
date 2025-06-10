@@ -35,7 +35,7 @@ RUN apk add --upgrade krb5-libs
 RUN apk add --no-cache py3-pyarrow=12.0.0-r0
 RUN cp -Rav /usr/lib/python3.11/site-packages/pyarrow* /usr/local/lib/python3.11/site-packages/
 
-RUN apk add py3-pandas=1.5.1-r0
+RUN apk add py3-pandas=1.5.3-r1
 RUN cp -Rav /usr/lib/python3.11/site-packages/pandas* /usr/local/lib/python3.11/site-packages/
 
 RUN apk add py3-numpy=1.24.4-r0
