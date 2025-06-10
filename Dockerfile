@@ -1,4 +1,4 @@
-FROM python:3.12-alpine3.20
+FROM python:3.10-alpine3.17
 
 RUN apk add --update --no-cache \
         libffi-dev \
@@ -16,28 +16,25 @@ RUN apk add --update --no-cache \
         flex \
         bison \
         rust \
-        curl=8.12.1-r0 \
-        nghttp2-dev=1.62.1-r0 \
+        curl=8.9.0-r0 \
+        nghttp2=1.51.0-r2 \
     && apk add --virtual .build-deps gcc g++ musl-dev git \
     && apk add --upgrade krb5-libs apk-tools
 
-RUN apk add --update --no-cache
-
-RUN python -m pip install pip==24.2
-
-RUN apk -U upgrade
-
-RUN apk update && apk add --upgrade libcrypto3 libssl3 busybox libarchive libexpat libxml2 perl sqlite-libs curl libcurl python3 python3-pyc python3-pycache-pyc0 binutils libxml2  xz xz-dev xz-libs
-
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
-RUN apk update && apk add --upgrade krb5-libs
+RUN apk add --update --no-cache
+RUN apk -U upgrade
 
-RUN pip install -U setuptools==70.0.0
+RUN python -m pip install --upgrade pip setuptools wheel
 
-RUN apk add --no-cache py3-pyarrow=16.1.0-r0
+RUN apk add --upgrade libcrypto3 libssl3 busybox libarchive libexpat libxml2 perl sqlite-libs curl libcurl python3 binutils libxml2  xz xz-dev xz-libs
 
-RUN cp -Rav /usr/lib/python3.12/site-packages/pyarrow* /usr/local/lib/python3.12/site-packages/
+RUN apk add --upgrade krb5-libs
+
+RUN apk add --no-cache py3-pyarrow=10.0.1-r2
+
+RUN cp -Rav /usr/lib/python3.10/site-packages/pyarrow* /usr/local/lib/python3.10/site-packages/
 
 RUN pip install cython pandas confluent-kafka==v1.5.0
 
