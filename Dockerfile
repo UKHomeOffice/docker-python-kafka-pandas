@@ -1,4 +1,4 @@
-FROM python:3.10-alpine3.17
+FROM python:3.9-alpine3.16
 
 RUN apk add --update --no-cache \
         libffi-dev \
@@ -16,8 +16,8 @@ RUN apk add --update --no-cache \
         flex \
         bison \
         rust \
-        curl=8.9.0-r0 \
-        nghttp2=1.51.0-r2 \
+        curl=8.5.0-r0 \
+        nghttp2=1.47.0-r2 \
     && apk add --virtual .build-deps gcc g++ musl-dev git \
     && apk add --upgrade krb5-libs apk-tools
 
@@ -32,13 +32,10 @@ RUN apk add --upgrade libcrypto3 libssl3 busybox libarchive libexpat libxml2 per
 
 RUN apk add --upgrade krb5-libs
 
-RUN apk add --no-cache py3-pyarrow=10.0.1-r2
-RUN cp -Rav /usr/lib/python3.10/site-packages/pyarrow* /usr/local/lib/python3.10/site-packages/
+RUN pip install numpy==1.22.3 pyarrow==20.0.0
 
-RUN pip install numpy==1.24.4
-
-RUN apk add py3-pandas=1.5.1-r0
-RUN cp -Rav /usr/lib/python3.10/site-packages/pandas* /usr/local/lib/python3.10/site-packages/
+RUN apk add py3-pandas=1.3.2-r2
+RUN cp -Rav /usr/lib/python3.9/site-packages/pandas* /usr/local/lib/python3.9/site-packages/
 
 RUN pip install cython confluent-kafka==v1.5.0
 
