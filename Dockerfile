@@ -28,7 +28,7 @@ RUN apk -U upgrade
 
 RUN python -m pip install --upgrade pip setuptools wheel
 
-RUN apk add --upgrade libcrypto3 libssl3 busybox libarchive libexpat libxml2 perl sqlite-libs curl libcurl python3 binutils libxml2  xz xz-dev xz-libs
+RUN apk add --upgrade libcrypto3 libssl3 busybox libarchive libxml2 perl sqlite-libs curl libcurl python3 binutils libxml2  xz xz-dev xz-libs
 
 RUN apk add --upgrade krb5-libs
 
