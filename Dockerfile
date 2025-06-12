@@ -32,10 +32,7 @@ RUN apk add --upgrade libcrypto3 libssl3 busybox libarchive libxml2 perl sqlite-
 
 RUN apk add --upgrade krb5-libs
 
-RUN pip install numpy==1.22.3 pyarrow==20.0.0
-
-RUN apk add py3-pandas=1.3.2-r0
-RUN cp -Rav /usr/lib/python3.9/site-packages/pandas* /usr/local/lib/python3.9/site-packages/
+RUN pip install numpy==1.22.3 pyarrow==20.0.0 pandas==1.5.0
 
 RUN pip install cython confluent-kafka==v1.5.0
 
