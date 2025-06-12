@@ -32,7 +32,7 @@ RUN apk add --upgrade libcrypto3 libssl3 busybox libarchive libexpat libxml2 per
 
 RUN apk add --upgrade krb5-libs
 
-RUN pip install numpy==1.22.3 pyarrow==17.0.0 pandas==1.5.0
+RUN pip install pyarrow==17.0.0 pandas==1.5.0 numpy
 
 RUN pip install cython confluent-kafka==v1.5.0
 
