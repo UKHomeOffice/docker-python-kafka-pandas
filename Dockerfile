@@ -18,6 +18,7 @@ RUN apk add --update --no-cache \
         rust \
         curl=8.12.1-r0 \
         nghttp2-dev=1.57.0-r0 \
+        py3-numpy=1.24.4-r0 \
     && apk add --virtual .build-deps gcc g++ musl-dev git \
     && apk add --upgrade krb5-libs apk-tools
 
@@ -32,7 +33,7 @@ RUN apk add --upgrade libcrypto3 libssl3 busybox libarchive libexpat libxml2 per
 
 RUN apk add --upgrade krb5-libs
 
-RUN pip install pyarrow==17.0.0 pandas==1.5.0 numpy
+RUN pip install pyarrow==17.0.0 pandas==1.5.0
 
 RUN pip install cython confluent-kafka==v1.5.0
 
