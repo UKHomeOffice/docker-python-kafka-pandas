@@ -1,4 +1,4 @@
-FROM python:3.9.10-alpine3.15
+FROM python:3.9.5-alpine3.13
 
 RUN apk add --update --no-cache \
         libffi-dev \
@@ -16,8 +16,8 @@ RUN apk add --update --no-cache \
         flex \
         bison \
         rust \
-        curl=8.5.0-r0 \
-        nghttp2=1.46.0-r2 \
+        curl=7.79.1-r3 \
+        nghttp2=1.42.0-r1 \
     && apk add --virtual .build-deps gcc g++ musl-dev git \
     && apk add --upgrade krb5-libs apk-tools
 
