@@ -1,4 +1,4 @@
-FROM python:3.9.5-alpine3.12
+FROM python:3.8-alpine3.18
 
 RUN apk add --update --no-cache \
         libffi-dev \
@@ -16,8 +16,8 @@ RUN apk add --update --no-cache \
         flex \
         bison \
         rust \
-        curl=7.79.1-r1 \
-        nghttp2=1.41.0-r0 \
+        curl=8.12.1-r0 \
+        nghttp2-dev=1.57.0-r0 \
     && apk add --virtual .build-deps gcc g++ musl-dev git \
     && apk add --upgrade krb5-libs apk-tools
 
@@ -28,7 +28,7 @@ RUN apk -U upgrade
 
 RUN python -m pip install --upgrade pip setuptools wheel
 
-RUN apk add --upgrade busybox libarchive libxml2 perl sqlite-libs curl libcurl python3 binutils libxml2  xz xz-dev xz-libs
+RUN apk add --upgrade libcrypto3 libssl3 busybox libarchive libexpat libxml2 perl sqlite-libs curl libcurl python3 python3-pyc python3-pycache-pyc0 binutils libxml2  xz xz-dev xz-libs
 
 RUN apk add --upgrade krb5-libs
 
