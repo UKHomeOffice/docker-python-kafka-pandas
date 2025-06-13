@@ -26,11 +26,10 @@ RUN apk -U upgrade
 ENV CFLAGS="-Wno-deprecated-declarations -Wno-unreachable-code"
 
 RUN pip install -U setuptools pip wheel
-RUN pip install -U numpy==1.24.4
+RUN pip install numpy==1.24.4
 
 RUN apk add py3-pandas=1.1.5-r0
 RUN cp -Rav /usr/lib/python3.8/site-packages/pandas* /usr/local/lib/python3.8/site-packages/
-ENV PYTHONPATH=/usr/lib/python3.8/site-packages
 
 RUN pip install pandas cython==0.29.37 confluent-kafka==v1.5.0
 
@@ -43,9 +42,6 @@ WORKDIR /arrow/cpp/build
 ENV ARROW_BUILD_TYPE=release
 ENV ARROW_HOME=/usr/local
 ENV PARQUET_HOME=/usr/local
-
-# disable backtrace
-#RUN sed -i -e '/_EXECINFO_H/,/endif/d' -e '/execinfo/d' ../src/arrow/util/logging.cc
 
 RUN cmake -DCMAKE_BUILD_TYPE=$ARROW_BUILD_TYPE \
           -DCMAKE_INSTALL_LIBDIR=lib \
