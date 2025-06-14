@@ -34,7 +34,7 @@ RUN cp -Rav /usr/lib/python3.8/site-packages/pandas* /usr/local/lib/python3.8/si
 RUN pip install pandas cython==0.29.37 confluent-kafka==v1.5.0
 
 # https://arrow.apache.org/docs/developers/cpp/building.html?highlight=snappy
-RUN git clone --depth 1 --branch apache-arrow-10.0.0 https://github.com/apache/arrow.git
+RUN git clone --depth 1 --branch apache-arrow-16.0.0 https://github.com/apache/arrow.git
 
 RUN mkdir /arrow/cpp/build
 WORKDIR /arrow/cpp/build
