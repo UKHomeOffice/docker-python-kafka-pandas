@@ -15,7 +15,17 @@ RUN apk update --no-cache && \
         librdkafka-dev \
         python3-dev \
         openssl-dev \
-        linux-headers
+        linux-headers \
+        libcrypto3 \
+        libexpat \
+        libssl3 \
+        musl \
+        musl-dev \
+        musl-utils \
+        openssl-dev \
+        zlib \
+        zlib-dev
+
 RUN pip install --no-cache-dir --upgrade \
     pip>=26.0.1 \
     "wheel>=0.46.2" \
