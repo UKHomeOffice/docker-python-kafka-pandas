@@ -1,4 +1,4 @@
-FROM python:3.9-alpine3.22
+FROM python:3.10-alpine3.22
 RUN apk add --update --no-cache && apk update && apk -U upgrade
 # Combine apk commands for efficiency + latest security patches
 RUN apk update --no-cache && \
