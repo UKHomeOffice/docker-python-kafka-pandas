@@ -9,7 +9,6 @@ RUN apk update --no-cache && \
         linux-headers libcrypto3 libexpat libssl3 zlib zlib-dev
 
 # 2. Upgrade core build tools & Cython 3.x
-# Cython 3+ is required for Python 3.12 C-API compatibility
 RUN pip install --no-cache-dir --upgrade \
     "pip>=26.0.1" \
     "wheel>=0.46.2" \
@@ -17,16 +16,15 @@ RUN pip install --no-cache-dir --upgrade \
     "Cython>=3.0.0"
 
 # 3. Data Science & Streaming Stack
-# - numpy bumped to >=1.26.0 (required for Python 3.12 support without legacy distutils)
-# - confluent-kafka bumped to >=2.3.0 for Python 3.12 compatibility
+# NOTE: Pin confluent-kafka to 2.3.0 or <2.8.0 so it stays compatible with Alpine 3.22's librdkafka-dev
 RUN pip install --no-cache-dir --no-build-isolation \
     "numpy>=1.26.0" \
     "pandas>=2.2.0" \
-    "confluent-kafka>=2.3.0" \
+    "confluent-kafka==2.3.0" \
     "pyarrow>=15.0.0" \
     "urllib3>=2.6.0"
 
-# 4. Optional: Extra dependencies requested in previous iterations
+# 4. Modern utilities
 RUN pip install --no-cache-dir "jaraco.context>=6.1.0"
 
 WORKDIR /app
