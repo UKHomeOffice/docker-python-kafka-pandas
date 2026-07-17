@@ -12,7 +12,7 @@ RUN apk update --no-cache && \
 RUN pip install --no-cache-dir --upgrade \
     "pip>=26.0.1" \
     "wheel>=0.46.2" \
-    "setuptools>=75.0" \
+    "setuptools<70.0" \
     "Cython>=3.0.0"
 
 # 3. Data Science & Streaming Stack
