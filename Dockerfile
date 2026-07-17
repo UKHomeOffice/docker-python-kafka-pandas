@@ -10,8 +10,8 @@ RUN apk update --no-cache && \
 
 # 2. CRITICAL CHANGE: Downgrade Setuptools for NumPy 1.24.2 compatibility
 # NumPy 1.24.x requires setuptools < 60 to find distutils during build
-RUN pip install --no-cache-dir --upgrade pip>=26.0.1 wheel>=0.46.2
-RUN pip install --no-cache-dir "setuptools<60.0" "Cython==0.29.37"
+RUN pip install --no-cache-dir --upgrade pip>=26.0.1 wheel>=0.46.2 && \
+    pip install --no-cache-dir "setuptools<60.0" "Cython==0.29.37"
 
 # 3. Install NumPy and Data Science tools
 # Now NumPy 1.24.2 will find distutils and compile successfully
@@ -25,7 +25,7 @@ RUN pip install --no-cache-dir --no-build-isolation \
 # 4. Now upgrade Setuptools back to a secure/modern version for the App
 RUN pip install --no-cache-dir --upgrade "setuptools>=75.0" "jaraco.context>=6.1.0"
 
-ENV PATH="/usr/local/bin:${PATH}"
-ENV PYTHONPATH="/usr/local/lib/python3.10/site-packages"
+#ENV PATH="/usr/local/bin:${PATH}"
+#ENV PYTHONPATH="/usr/local/lib/python3.10/site-packages"
 
 WORKDIR /app
