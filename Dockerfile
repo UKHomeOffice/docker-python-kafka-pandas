@@ -10,8 +10,8 @@ RUN apk update --no-cache && \
 
 # 2. Upgrade core build tools & Cython 3.x
 RUN pip install --no-cache-dir --upgrade \
-    "pip>=26.0.1" \
-    "wheel>=0.46.2" \
+    "pip>=24.0" \
+    "wheel>=0.42.0" \
     "setuptools<70.0" \
     "Cython>=3.0.0"
 
@@ -22,7 +22,7 @@ RUN pip install --no-cache-dir --no-build-isolation \
     "pandas>=2.2.0" \
     "confluent-kafka==2.3.0" \
     "pyarrow>=15.0.0" \
-    "urllib3>=2.6.0"
+    "urllib3>=2.0.0"
 
 # 4. Modern utilities
 RUN pip install --no-cache-dir "jaraco.context>=6.1.0"
