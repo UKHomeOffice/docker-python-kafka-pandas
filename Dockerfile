@@ -21,7 +21,7 @@ RUN pip install --no-cache-dir --no-build-isolation \
     "numpy>=1.26.0" \
     "pandas>=2.2.0" \
     "confluent-kafka==2.3.0" \
-    "pyarrow>=15.0.0" \
+    "pyarrow==23.0.1" \
     "urllib3>=2.0.0"
 
 # 4. Modern utilities
